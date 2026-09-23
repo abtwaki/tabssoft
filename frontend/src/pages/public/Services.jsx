@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, ExternalLink, GraduationCap } from "lucide-react";
 import { Link } from "react-router-dom";
 import TabsForgeLogo from "../../components/TabsForgeLogo";
 
@@ -25,6 +25,7 @@ const SECTIONS = [
       "Finance: fees, invoicing, reporting",
       "Parent/staff communications portal",
     ],
+    external: "https://tabsforge.com",
   },
   {
     id: "consulting",
@@ -88,6 +89,16 @@ export default function Services() {
                   <Link to="/pricing" className="btn btn-primary btn-sm" style={{ marginTop: 18 }}>
                     See AI Suite plans <ArrowRight size={15} />
                   </Link>
+                )}
+                {s.external && (
+                  <div className="flex wrap" style={{ marginTop: 18 }}>
+                    <a href={s.external} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-sm">
+                      <GraduationCap size={15} /> Onboard your school
+                    </a>
+                    <a href={s.external} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-sm">
+                      Learn more <ExternalLink size={14} />
+                    </a>
+                  </div>
                 )}
               </div>
             ))}

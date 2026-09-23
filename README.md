@@ -57,7 +57,7 @@ Demo logins (password `DemoPass2026!`): `admin@tabssoftglobal.com` (staff),
 | `PAYSTACK_SECRET_KEY` / `PAYSTACK_PUBLIC_KEY` | Test keys now, live keys at launch |
 | `FIELD_ENCRYPTION_KEY` | Fernet key — `python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"` |
 | `FRONTEND_URL` | e.g. `https://tabssoftglobal.com` — Paystack callback target |
-| `EMAIL_*`, `CONTACT_EMAIL` | SMTP + contact-form recipient |
+| `EMAIL_*`, `CONTACT_EMAIL` | SMTP (Brevo: `smtp-relay.brevo.com:587`, TLS) + contact-form recipient. From address must be a verified Brevo sender |
 | `DJANGO_ALLOWED_HOSTS`, `DJANGO_CSRF_TRUSTED_ORIGINS`, `CORS_ALLOWED_ORIGINS` | host/origin allowlists |
 
 ## AI engine
