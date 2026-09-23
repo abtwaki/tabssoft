@@ -4,6 +4,7 @@ import {
 } from "lucide-react";
 import { Link } from "react-router-dom";
 import HeroCarousel from "../../components/HeroCarousel";
+import TabsForgeLogo from "../../components/TabsForgeLogo";
 
 const SERVICES = [
   {
@@ -12,7 +13,7 @@ const SERVICES = [
     text: "Custom platforms, portals and internal systems — engineered end-to-end to global standards.",
   },
   {
-    icon: GraduationCap,
+    logo: true,
     title: "TabsForge SchoolOS",
     text: "A complete operating system for schools: admissions, academics, finance and communications.",
   },
@@ -72,8 +73,12 @@ export default function Home() {
           <div className="grid grid-4 mt-4 stagger">
             {SERVICES.map((s) => (
               <div className="card" key={s.title}>
-                <div className="card-icon"><s.icon size={22} /></div>
-                <h3>{s.title}</h3>
+                {s.logo ? (
+                  <TabsForgeLogo height={52} style={{ marginBottom: 18 }} />
+                ) : (
+                  <div className="card-icon"><s.icon size={22} /></div>
+                )}
+                {!s.logo && <h3>{s.title}</h3>}
                 <p>{s.text}</p>
               </div>
             ))}

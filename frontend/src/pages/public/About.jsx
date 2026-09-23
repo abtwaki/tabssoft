@@ -1,4 +1,5 @@
-import { Award, Building2, GraduationCap, Landmark, ShieldCheck } from "lucide-react";
+import { Award, Building2, Landmark } from "lucide-react";
+import TabsForgeLogo from "../../components/TabsForgeLogo";
 
 const CREDS = [
   "CITP — Chartered IT Practitioner",
@@ -11,7 +12,7 @@ const CREDS = [
 
 const SERVICES = [
   { icon: Building2, title: "Software Development", text: "Enterprise web platforms, portals and internal systems." },
-  { icon: GraduationCap, title: "TabsForge SchoolOS", text: "School management built for Nigerian institutions." },
+  { logo: true, title: "TabsForge SchoolOS", text: "School management built for Nigerian institutions." },
   { icon: Users2, title: "IT Consulting & Training", text: "ADAPTI-style digital capacity programmes and advisory." },
   { icon: Cpu2, title: "AI Solutions", text: "Applied AI products and the TabsSoft AI Suite." },
 ];
@@ -52,8 +53,12 @@ export default function About() {
           <div className="grid grid-4 stagger">
             {SERVICES.map((s) => (
               <div className="card" key={s.title}>
-                <div className="card-icon"><s.icon size={22} /></div>
-                <h3 style={{ fontSize: 16.5 }}>{s.title}</h3>
+                {s.logo ? (
+                  <TabsForgeLogo height={48} style={{ marginBottom: 16 }} />
+                ) : (
+                  <div className="card-icon"><s.icon size={22} /></div>
+                )}
+                {!s.logo && <h3 style={{ fontSize: 16.5 }}>{s.title}</h3>}
                 <p style={{ fontSize: 14 }}>{s.text}</p>
               </div>
             ))}

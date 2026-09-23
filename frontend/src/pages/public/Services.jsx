@@ -1,5 +1,6 @@
 import { ArrowRight, CheckCircle2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import TabsForgeLogo from "../../components/TabsForgeLogo";
 
 const SECTIONS = [
   {
@@ -16,6 +17,7 @@ const SECTIONS = [
   {
     id: "tabsforge",
     title: "TabsForge SchoolOS",
+    logo: true,
     lead: "A complete operating system for schools — admissions to graduation.",
     points: [
       "Admissions, enrolment and student records",
@@ -68,7 +70,11 @@ export default function Services() {
           <div className="grid grid-2 stagger">
             {SECTIONS.map((s) => (
               <div className="card" key={s.id} id={s.id} style={{ padding: 34 }}>
-                <h2 style={{ fontSize: 23, marginBottom: 8 }}>{s.title}</h2>
+                {s.logo ? (
+                  <TabsForgeLogo height={58} style={{ marginBottom: 14 }} />
+                ) : (
+                  <h2 style={{ fontSize: 23, marginBottom: 8 }}>{s.title}</h2>
+                )}
                 <p className="muted" style={{ marginBottom: 18 }}>{s.lead}</p>
                 <ul style={{ listStyle: "none", padding: 0 }}>
                   {s.points.map((p) => (

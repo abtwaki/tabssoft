@@ -1,6 +1,7 @@
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import TabsForgeLogo from "./TabsForgeLogo";
 
 const SLIDES = [
   {
@@ -14,7 +15,7 @@ const SLIDES = [
   {
     key: "schoolos",
     bg: "/assets/hero/schoolos.svg",
-    eyebrow: "TabsForge SchoolOS",
+    logo: true,
     title: "One operating system for the entire school.",
     sub: "Admissions, academics, finance and communications — built for how Nigerian schools actually run.",
     cta: { to: "/services", label: "See SchoolOS" },
@@ -94,7 +95,11 @@ export default function HeroCarousel() {
           <div className="hc-overlay" />
           <div className="container hc-content">
             <div className="hc-caption" key={`${s.key}-${i === index}`}>
-              <span className="hc-eyebrow">{s.eyebrow}</span>
+              {s.logo ? (
+                <TabsForgeLogo height={56} card style={{ marginBottom: 22 }} />
+              ) : (
+                <span className="hc-eyebrow">{s.eyebrow}</span>
+              )}
               <h1>{s.title}</h1>
               <p>{s.sub}</p>
               <div className="hero-actions">

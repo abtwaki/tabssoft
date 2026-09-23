@@ -553,6 +553,13 @@ table.data tr:hover td { background: var(--bg-soft); }
   .hc-caption p { font-size: 16px; }
 }
 
+/* TabsForge SchoolOS logo treatment */
+.tabsforge-logo { width: auto; object-fit: contain; display: block; }
+.tabsforge-logo.card {
+  background: #fff; padding: 9px 18px; border-radius: 14px;
+  box-shadow: var(--shadow-md);
+}
+
 /* Trust strip under hero */
 .trust-strip {
   border-bottom: 1px solid var(--border);
