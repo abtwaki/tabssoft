@@ -1,8 +1,9 @@
 import {
-  ArrowRight, Award, Bot, Building2, Code2, Cpu, GraduationCap, Landmark,
+  Award, Bot, Building2, Code2, Cpu, GraduationCap, Landmark,
   MessageCircle, ShieldCheck, Sparkles, Users,
 } from "lucide-react";
 import { Link } from "react-router-dom";
+import HeroCarousel from "../../components/HeroCarousel";
 
 const SERVICES = [
   {
@@ -47,34 +48,14 @@ function BookIcon(props) {
 export default function Home() {
   return (
     <>
-      <section className="hero">
-        <div className="container">
-          <div className="hero-inner fade-in">
-            <span className="eyebrow">
-              <Sparkles size={14} /> RC 9350407 · Minna, Nigeria
-            </span>
-            <h1>
-              Technology that works as hard as <span className="grad">you do.</span>
-            </h1>
-            <p>
-              TabsSoft Global Technologies builds enterprise-grade software and
-              AI tools for institutions and professionals — engineered in
-              Nigeria, delivered to a global standard.
-            </p>
-            <div className="hero-actions">
-              <Link to="/signup" className="btn btn-primary btn-lg">
-                Start free with AI Suite <ArrowRight size={17} />
-              </Link>
-              <Link to="/services" className="btn btn-outline btn-lg">
-                Explore services
-              </Link>
-            </div>
-            <div className="hero-badges">
-              <span className="hero-badge"><ShieldCheck size={17} /> CAC-registered · RC 9350407</span>
-              <span className="hero-badge"><Award size={17} /> CITP & MCPN certified leadership</span>
-              <span className="hero-badge"><Bot size={17} /> NDPR-compliant data handling</span>
-            </div>
-          </div>
+      <HeroCarousel />
+
+      <section className="trust-strip">
+        <div className="container trust-inner">
+          <span className="hero-badge"><ShieldCheck size={17} /> CAC-registered · RC 9350407</span>
+          <span className="hero-badge"><Award size={17} /> CITP & MCPN certified leadership</span>
+          <span className="hero-badge"><Bot size={17} /> NDPR-compliant data handling</span>
+          <span className="hero-badge"><Sparkles size={17} /> Minna, Nigeria → the world</span>
         </div>
       </section>
 

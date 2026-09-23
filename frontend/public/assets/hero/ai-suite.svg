@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 810" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg4" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a1f47"/>
+      <stop offset="0.5" stop-color="#194c9f"/>
+      <stop offset="1" stop-color="#0f2d5c"/>
+    </linearGradient>
+    <radialGradient id="glow4" cx="0.72" cy="0.4" r="0.75">
+      <stop offset="0" stop-color="#53c7ec" stop-opacity="0.4"/>
+      <stop offset="1" stop-color="#53c7ec" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="syn" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#517ebf"/>
+      <stop offset="1" stop-color="#53c7ec"/>
+    </linearGradient>
+  </defs>
+  <rect width="1440" height="810" fill="url(#bg4)"/>
+  <rect width="1440" height="810" fill="url(#glow4)"/>
+  <!-- neural network -->
+  <g stroke="url(#syn)" stroke-width="1.6" opacity="0.55">
+    <!-- layer1->layer2 -->
+    <path d="M820 250 L990 200 M820 250 L990 330 M820 250 L990 460 M820 250 L990 590"/>
+    <path d="M820 420 L990 200 M820 420 L990 330 M820 420 L990 460 M820 420 L990 590"/>
+    <path d="M820 580 L990 200 M820 580 L990 330 M820 580 L990 460 M820 580 L990 590"/>
+    <!-- layer2->layer3 -->
+    <path d="M990 200 L1160 300 M990 200 L1160 500"/>
+    <path d="M990 330 L1160 300 M990 330 L1160 500"/>
+    <path d="M990 460 L1160 300 M990 460 L1160 500"/>
+    <path d="M990 590 L1160 300 M990 590 L1160 500"/>
+    <!-- layer3->out -->
+    <path d="M1160 300 L1300 405 M1160 500 L1300 405"/>
+  </g>
+  <!-- animated signal paths -->
+  <g stroke="#85d3ea" stroke-width="2.5" fill="none" opacity="0.95">
+    <path d="M820 250 L990 330 L1160 300 L1300 405" stroke-dasharray="10 14">
+      <animate attributeName="stroke-dashoffset" from="96" to="0" dur="2s" repeatCount="indefinite"/>
+    </path>
+    <path d="M820 580 L990 460 L1160 500 L1300 405" stroke-dasharray="10 14">
+      <animate attributeName="stroke-dashoffset" from="0" to="96" dur="2.4s" repeatCount="indefinite"/>
+    </path>
+  </g>
+  <!-- nodes -->
+  <g>
+    <g fill="#0f2d5c" stroke="#53c7ec" stroke-width="3">
+      <circle cx="820" cy="250" r="24"/><circle cx="820" cy="420" r="24"/><circle cx="820" cy="580" r="24"/>
+    </g>
+    <g fill="#0f2d5c" stroke="#85d3ea" stroke-width="3">
+      <circle cx="990" cy="200" r="20"/><circle cx="990" cy="330" r="20"/><circle cx="990" cy="460" r="20"/><circle cx="990" cy="590" r="20"/>
+    </g>
+    <g fill="#0f2d5c" stroke="#53c7ec" stroke-width="3">
+      <circle cx="1160" cy="300" r="18"/><circle cx="1160" cy="500" r="18"/>
+    </g>
+    <circle cx="1300" cy="405" r="30" fill="#53c7ec"/>
+    <circle cx="1300" cy="405" r="44" fill="none" stroke="#53c7ec" stroke-width="2" opacity="0.5">
+      <animate attributeName="r" values="44;64" dur="2.2s" repeatCount="indefinite"/>
+      <animate attributeName="opacity" values="0.6;0" dur="2.2s" repeatCount="indefinite"/>
+    </circle>
+  </g>
+  <!-- sparkle / sparkle particles -->
+  <g fill="#85d3ea">
+    <circle cx="700" cy="160" r="3" opacity="0.8"><animate attributeName="opacity" values="0.8;0.2;0.8" dur="3s" repeatCount="indefinite"/></circle>
+    <circle cx="1080" cy="120" r="4" opacity="0.6"><animate attributeName="opacity" values="0.6;0.15;0.6" dur="2.6s" repeatCount="indefinite"/></circle>
+    <circle cx="1260" cy="640" r="3" opacity="0.7"><animate attributeName="opacity" values="0.7;0.2;0.7" dur="3.4s" repeatCount="indefinite"/></circle>
+    <circle cx="900" cy="700" r="3.5" opacity="0.6"><animate attributeName="opacity" values="0.6;0.15;0.6" dur="2.9s" repeatCount="indefinite"/></circle>
+    <circle cx="640" cy="480" r="3" opacity="0.7"><animate attributeName="opacity" values="0.7;0.2;0.7" dur="3.2s" repeatCount="indefinite"/></circle>
+  </g>
+  <g stroke="#85d3ea" stroke-opacity="0.1">
+    <path d="M0 200h1440M0 610h1440"/>
+    <path d="M360 0v810M1200 0v810"/>
+  </g>
+</svg>

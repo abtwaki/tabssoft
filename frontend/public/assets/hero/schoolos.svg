@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 810" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0f2d5c"/>
+      <stop offset="0.6" stop-color="#194c9f"/>
+      <stop offset="1" stop-color="#1f5cc4"/>
+    </linearGradient>
+    <radialGradient id="glow2" cx="0.75" cy="0.3" r="0.8">
+      <stop offset="0" stop-color="#85d3ea" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="#85d3ea" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1440" height="810" fill="url(#bg2)"/>
+  <rect width="1440" height="810" fill="url(#glow2)"/>
+  <g stroke="#85d3ea" stroke-opacity="0.12">
+    <path d="M0 162h1440M0 324h1440M0 486h1440M0 648h1440"/>
+    <path d="M240 0v810M480 0v810M720 0v810M960 0v810M1200 0v810"/>
+  </g>
+  <!-- dashboard card cluster -->
+  <g transform="translate(760 140)">
+    <rect width="560" height="380" rx="18" fill="#0a1f47" stroke="#53c7ec" stroke-opacity="0.5"/>
+    <rect width="560" height="54" rx="18" fill="#0f2d5c"/>
+    <rect y="36" width="560" height="18" fill="#0f2d5c"/>
+    <circle cx="30" cy="27" r="7" fill="#53c7ec"/>
+    <rect x="54" y="20" width="140" height="14" rx="7" fill="#85d3ea" opacity="0.85"/>
+    <!-- stat tiles -->
+    <g>
+      <rect x="24" y="78" width="160" height="84" rx="12" fill="#14397a" stroke="#517ebf" stroke-opacity="0.6"/>
+      <rect x="200" y="78" width="160" height="84" rx="12" fill="#14397a" stroke="#517ebf" stroke-opacity="0.6"/>
+      <rect x="376" y="78" width="160" height="84" rx="12" fill="#14397a" stroke="#53c7ec" stroke-opacity="0.7"/>
+      <rect x="40" y="98" width="70" height="10" rx="5" fill="#85d3ea" opacity="0.7"/>
+      <rect x="40" y="120" width="90" height="18" rx="6" fill="#53c7ec"/>
+      <rect x="216" y="98" width="70" height="10" rx="5" fill="#85d3ea" opacity="0.7"/>
+      <rect x="216" y="120" width="90" height="18" rx="6" fill="#85d3ea" opacity="0.9"/>
+      <rect x="392" y="98" width="70" height="10" rx="5" fill="#85d3ea" opacity="0.7"/>
+      <rect x="392" y="120" width="90" height="18" rx="6" fill="#53c7ec" opacity="0.9"/>
+    </g>
+    <!-- chart -->
+    <rect x="24" y="182" width="340" height="172" rx="12" fill="#0f2d5c" stroke="#517ebf" stroke-opacity="0.5"/>
+    <polyline points="50,320 100,290 150,300 200,255 250,265 300,225 340,235"
+      fill="none" stroke="#53c7ec" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+    <g fill="#53c7ec"><circle cx="50" cy="320" r="5"/><circle cx="150" cy="300" r="5"/><circle cx="250" cy="265" r="5"/><circle cx="340" cy="235" r="5"/></g>
+    <g fill="#85d3ea" opacity="0.8">
+      <rect x="392" y="182" width="144" height="172" rx="12" fill="#0f2d5c" stroke="#517ebf" stroke-opacity="0.5"/>
+      <rect x="410" y="290" width="20" height="46" rx="4" fill="#517ebf"/>
+      <rect x="440" y="260" width="20" height="76" rx="4" fill="#53c7ec"/>
+      <rect x="470" y="275" width="20" height="61" rx="4" fill="#85d3ea"/>
+      <rect x="500" y="235" width="20" height="101" rx="4" fill="#53c7ec" opacity="0.8"/>
+    </g>
+  </g>
+  <!-- graduation cap -->
+  <g transform="translate(620 560)" fill="none" stroke="#85d3ea" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" opacity="0.95">
+    <path d="M60 0 L120 30 L60 60 L0 30 Z" fill="#0f2d5c"/>
+    <path d="M28 44 v34 c0 12 64 12 64 0 v-34"/>
+    <path d="M120 30 v52"/>
+    <circle cx="120" cy="92" r="6" fill="#85d3ea" stroke="none"/>
+  </g>
+</svg>

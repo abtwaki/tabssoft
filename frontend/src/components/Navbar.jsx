@@ -18,9 +18,8 @@ export default function Navbar() {
   return (
     <header className="nav">
       <div className="container nav-inner">
-        <Link to="/" className="nav-brand">
+        <Link to="/" className="nav-brand" aria-label="TabsSoft Global Technologies — home">
           <img src="/assets/logo.jpeg" alt="TabsSoft Global Technologies" />
-          <span>TabsSoft</span>
         </Link>
 
         <button className="nav-toggle" onClick={() => setOpen(!open)} aria-label="Menu">

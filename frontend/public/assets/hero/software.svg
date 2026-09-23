@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 810" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a1f47"/>
+      <stop offset="0.55" stop-color="#14397a"/>
+      <stop offset="1" stop-color="#194c9f"/>
+    </linearGradient>
+    <linearGradient id="pane" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0f2d5c"/>
+      <stop offset="1" stop-color="#0a1f47"/>
+    </linearGradient>
+    <linearGradient id="cyan" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#53c7ec"/>
+      <stop offset="1" stop-color="#85d3ea"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.8" cy="0.25" r="0.8">
+      <stop offset="0" stop-color="#53c7ec" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#53c7ec" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1440" height="810" fill="url(#bg)"/>
+  <rect width="1440" height="810" fill="url(#glow)"/>
+  <!-- faint grid -->
+  <g stroke="#517ebf" stroke-opacity="0.18">
+    <path d="M0 162h1440M0 324h1440M0 486h1440M0 648h1440"/>
+    <path d="M240 0v810M480 0v810M720 0v810M960 0v810M1200 0v810"/>
+  </g>
+  <!-- code editor window -->
+  <g transform="translate(820 150)" opacity="0.92">
+    <rect width="480" height="330" rx="16" fill="url(#pane)" stroke="#53c7ec" stroke-opacity="0.5" stroke-width="1.5"/>
+    <rect width="480" height="46" rx="16" fill="#0a1f47"/>
+    <rect y="30" width="480" height="16" fill="#0a1f47"/>
+    <circle cx="28" cy="23" r="6" fill="#dc2626" opacity="0.85"/>
+    <circle cx="50" cy="23" r="6" fill="#d97706" opacity="0.85"/>
+    <circle cx="72" cy="23" r="6" fill="#0e9f6e" opacity="0.85"/>
+    <g fill="#85d3ea" font-family="monospace" font-size="19">
+      <rect x="26" y="70" width="90" height="12" rx="6" fill="#53c7ec" opacity="0.9"/>
+      <rect x="126" y="70" width="180" height="12" rx="6" fill="#517ebf" opacity="0.7"/>
+      <rect x="52" y="100" width="140" height="12" rx="6" fill="#85d3ea" opacity="0.75"/>
+      <rect x="52" y="130" width="230" height="12" rx="6" fill="#517ebf" opacity="0.55"/>
+      <rect x="52" y="160" width="110" height="12" rx="6" fill="#53c7ec" opacity="0.8"/>
+      <rect x="26" y="190" width="200" height="12" rx="6" fill="#85d3ea" opacity="0.6"/>
+      <rect x="26" y="220" width="150" height="12" rx="6" fill="#517ebf" opacity="0.65"/>
+      <rect x="26" y="250" width="90" height="12" rx="6" fill="#53c7ec" opacity="0.9"/>
+      <rect x="126" y="250" width="120" height="12" rx="6" fill="#85d3ea" opacity="0.5"/>
+    </g>
+  </g>
+  <!-- floating brackets + terminal -->
+  <g fill="none" stroke="url(#cyan)" stroke-width="5" opacity="0.9">
+    <path d="M700 260 l-34 34 34 34" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M780 260 l34 34 -34 34" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(640 430)">
+    <rect width="240" height="90" rx="12" fill="#0a1f47" stroke="#53c7ec" stroke-opacity="0.6"/>
+    <path d="M22 26 l18 12 -18 12" stroke="#53c7ec" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    <rect x="58" y="40" width="60" height="8" rx="4" fill="#85d3ea" opacity="0.8"/>
+    <rect x="22" y="62" width="150" height="8" rx="4" fill="#517ebf" opacity="0.5"/>
+  </g>
+  <!-- cursor blink -->
+  <rect x="694" y="300" width="14" height="30" fill="#53c7ec">
+    <animate attributeName="opacity" values="1;0;1" dur="1.1s" repeatCount="indefinite"/>
+  </rect>
+</svg>

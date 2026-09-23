@@ -44,14 +44,12 @@ export default function AppLayout({ admin = false }) {
         <button className="btn btn-ghost btn-sm" onClick={() => setOpen(!open)} aria-label="Menu">
           {open ? <X size={20} /> : <Menu size={20} />}
         </button>
-        <img src="/assets/logo.jpeg" alt="TabsSoft" />
-        <span style={{ fontWeight: 700, fontFamily: "var(--font-display)" }}>AI Suite</span>
+        <img src="/assets/logo.jpeg" alt="TabsSoft Global Technologies" />
       </div>
       <div className="app-shell">
         <aside className={`sidebar ${open ? "open" : ""}`}>
-          <Link to="/" className="nav-brand">
-            <img src="/assets/logo.jpeg" alt="TabsSoft" />
-            <span>AI Suite</span>
+          <Link to="/" className="nav-brand" aria-label="TabsSoft Global Technologies — home">
+            <img src="/assets/logo.jpeg" alt="TabsSoft Global Technologies" />
           </Link>
 
           <div className="side-label">{admin ? "Staff admin" : "Menu"}</div>
