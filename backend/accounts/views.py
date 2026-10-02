@@ -72,7 +72,10 @@ class MeView(APIView):
 
 
 class LogoutView(APIView):
-    """Blacklist the refresh token so it can no longer mint access tokens."""
+    """Blacklist the refresh token so it can no longer mint access tokens.
+    AllowAny: logout must work even when the access token has expired."""
+
+    permission_classes = (permissions.AllowAny,)
 
     def post(self, request):
         refresh = request.data.get("refresh", "")

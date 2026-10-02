@@ -107,7 +107,7 @@ class AuthFlowTests(APITestCase):
     def test_logout_blacklists_refresh_token(self):
         res = self.register()
         refresh = res.data["tokens"]["refresh"]
-        self.client.credentials(HTTP_AUTHORIZATION=f"Bearer {res.data['tokens']['access']}")
+        # logout works without an access token (it may have expired)
         out = self.client.post("/api/auth/logout/", {"refresh": refresh}, format="json")
         self.assertEqual(out.status_code, 204)
         reused = self.client.post("/api/auth/refresh/", {"refresh": refresh})
