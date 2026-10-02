@@ -17,6 +17,10 @@ export function getAccessToken() {
   return accessToken;
 }
 
+export function getRefreshToken() {
+  return refreshToken;
+}
+
 async function doRefresh() {
   if (!refreshToken) return false;
   try {

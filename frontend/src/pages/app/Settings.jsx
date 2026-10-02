@@ -25,6 +25,9 @@ export default function Settings() {
   });
   const [saved, setSaved] = useState(false);
   const [pw, setPw] = useState("");
+  const [pwForm, setPwForm] = useState({ current_password: "", new_password: "", confirm: "" });
+  const [pwMsg, setPwMsg] = useState("");
+  const [pwErr, setPwErr] = useState("");
   const [error, setError] = useState("");
   const [usage, setUsage] = useState(null);
 
@@ -38,6 +41,26 @@ export default function Settings() {
     setSaved(true);
     reload?.();
     setTimeout(() => setSaved(false), 2200);
+  };
+
+  const changePassword = async (e) => {
+    e.preventDefault();
+    setPwErr("");
+    setPwMsg("");
+    if (pwForm.new_password !== pwForm.confirm) {
+      setPwErr("New passwords don't match.");
+      return;
+    }
+    try {
+      await api("/auth/password/change/", {
+        method: "POST",
+        body: { current_password: pwForm.current_password, new_password: pwForm.new_password },
+      });
+      setPwMsg("Password updated.");
+      setPwForm({ current_password: "", new_password: "", confirm: "" });
+    } catch (err) {
+      setPwErr(err.data?.current_password?.[0] || err.message);
+    }
   };
 
   const deleteAccount = async () => {
@@ -94,6 +117,32 @@ export default function Settings() {
             </div>
           </div>
           <button className="btn btn-primary">Save changes</button>
+        </form>
+      </div>
+
+      <div className="card mb-3">
+        <h3 style={{ marginBottom: 18 }}>Change password</h3>
+        {pwMsg && <div className="alert alert-success"><CheckCircle2 size={16} /> {pwMsg}</div>}
+        {pwErr && <div className="alert alert-error">{pwErr}</div>}
+        <form onSubmit={changePassword}>
+          <div className="grid grid-3">
+            <div className="field">
+              <label>Current password</label>
+              <input type="password" required value={pwForm.current_password}
+                onChange={(e) => setPwForm({ ...pwForm, current_password: e.target.value })} />
+            </div>
+            <div className="field">
+              <label>New password</label>
+              <input type="password" required minLength={8} value={pwForm.new_password}
+                onChange={(e) => setPwForm({ ...pwForm, new_password: e.target.value })} />
+            </div>
+            <div className="field">
+              <label>Confirm new password</label>
+              <input type="password" required minLength={8} value={pwForm.confirm}
+                onChange={(e) => setPwForm({ ...pwForm, confirm: e.target.value })} />
+            </div>
+          </div>
+          <button className="btn btn-outline">Update password</button>
         </form>
       </div>
 

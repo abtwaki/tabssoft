@@ -47,7 +47,17 @@ class Subscription(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def is_active(self):
-        return self.status in (self.Status.ACTIVE, self.Status.TRIALING)
+        if self.status not in (self.Status.ACTIVE, self.Status.TRIALING):
+            return False
+        # Free plans never expire; paid plans lapse at period end.
+        if self.plan_id and self.plan.price_ngn == 0:
+            return True
+        if self.current_period_end is None:
+            return True
+        return self.current_period_end > timezone.now()
+
+    def is_expired(self):
+        return self.status in (self.Status.ACTIVE, self.Status.TRIALING) and not self.is_active()
 
     def __str__(self):
         return f"{self.user.email} → {self.plan.slug} ({self.status})"

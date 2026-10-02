@@ -30,6 +30,7 @@ export default function AppLayout({ admin = false }) {
         { to: "/admin/subscribers", label: "Subscribers", icon: Users },
         { to: "/admin/templates", label: "Prompt templates", icon: Wand2 },
         { to: "/admin/blog", label: "Blog posts", icon: Newspaper },
+        { to: "/admin/content", label: "Site content", icon: FileText },
       ]
     : [
         { to: "/app", label: "Workspace", icon: LayoutDashboard, end: true },

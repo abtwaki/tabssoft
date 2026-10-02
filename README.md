@@ -10,14 +10,18 @@ production (SQLite locally).
 
 ```
 backend/          Django project (tabssoft) + apps
-  accounts/       users, roles, NDPR consent, JWT auth, account deletion
-  billing/        plans, subscriptions, Paystack (init/verify/webhook/cancel)
+  accounts/       users, roles, NDPR consent, JWT auth (+ logout blacklist),
+                  password change/forgot/reset, account deletion
+  billing/        plans, subscriptions, Paystack (init/verify/webhook/cancel),
+                  subscription lifecycle (expiry → free-tier degradation)
   ai_engine/      provider interface (Anthropic|OpenAI), tool registry,
                   prompt templates, quota enforcement, saved documents
-  cms/            blog posts + keyed site-content blocks
-  staffadmin/     /api/admin/* — CMS API: subscribers, templates, blog, analytics
+  cms/            blog posts + keyed site-content blocks (public /api/content/)
+  staffadmin/     /api/admin/* — CMS API: subscribers, templates, blog,
+                  site content, analytics
   core/           contact form, health check, field-level encryption
-frontend/         Vite + React SPA (public pages, /app dashboard, /admin CMS)
+frontend/         Vite + React SPA (public pages incl. /store + per-product
+                  privacy pages, /app dashboard, /admin CMS)
 deploy/           Apache vhost, systemd unit, deploy.sh
 ```
 
@@ -62,13 +66,17 @@ Demo logins (password `DemoPass2026!`): `admin@tabssoftglobal.com` (staff),
 
 ## AI engine
 
-One provider integration powers all 29 tools. Each tool has a default
+One provider integration powers all 28 tools. Each tool has a default
 system prompt + user template in `ai_engine/tools.py`; staff can override any
 of them live via **Admin → Prompt templates** (stored as versioned
 `PromptTemplate` rows — the newest active version wins).
 
 Quotas: per-plan monthly generation caps, enforced server-side before every
 call; per-user rate limiting on `/api/ai/generate/` via DRF throttling.
+Expired paid subscriptions automatically degrade to the free-tier quota.
+
+Tests: `python manage.py test` — 19 tests covering auth, quota enforcement,
+subscription expiry, role gating and generation (provider mocked).
 
 ## Payments
 

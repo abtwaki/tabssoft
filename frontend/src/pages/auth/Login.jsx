@@ -51,7 +51,10 @@ export default function Login() {
               />
             </div>
             <div className="field">
-              <label>Password</label>
+              <label style={{ display: "flex", justifyContent: "space-between" }}>
+                Password
+                <Link to="/forgot-password" className="small" style={{ fontWeight: 500 }}>Forgot?</Link>
+              </label>
               <input
                 type="password" required
                 value={form.password}

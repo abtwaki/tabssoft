@@ -28,6 +28,8 @@ class RegisterSerializer(serializers.Serializer):
         return value
 
     def create(self, validated_data):
+        from billing.services import get_or_create_subscription
+
         validated_data.pop("consent")
         password = validated_data.pop("password")
         user = User.objects.create_user(
@@ -36,6 +38,7 @@ class RegisterSerializer(serializers.Serializer):
             privacy_version=PRIVACY_VERSION,
             **validated_data,
         )
+        get_or_create_subscription(user)  # every account starts on the free plan
         return user
 
 
@@ -75,3 +78,23 @@ class UpdateProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ("full_name", "role", "organization", "phone")
+
+
+class PasswordChangeSerializer(serializers.Serializer):
+    current_password = serializers.CharField(write_only=True)
+    new_password = serializers.CharField(min_length=8, max_length=128, write_only=True)
+
+    def validate_current_password(self, value):
+        if not self.context["request"].user.check_password(value):
+            raise serializers.ValidationError("Current password is incorrect.")
+        return value
+
+
+class ForgotPasswordSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+
+class ResetPasswordSerializer(serializers.Serializer):
+    uid = serializers.CharField()
+    token = serializers.CharField()
+    new_password = serializers.CharField(min_length=8, max_length=128, write_only=True)

@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useState } from "react";
-import { api, getAccessToken, setTokens } from "../api/client";
+import { api, getAccessToken, getRefreshToken, setTokens } from "../api/client";
 
 const AuthContext = createContext(null);
 
@@ -57,6 +57,11 @@ export function AuthProvider({ children }) {
   );
 
   const logout = useCallback(() => {
+    const refresh = getRefreshToken();
+    if (refresh) {
+      // Blacklist server-side so the refresh token can't mint new access tokens.
+      api("/auth/logout/", { method: "POST", auth: false, body: { refresh } }).catch(() => {});
+    }
     setTokens(null, null);
     setUser(null);
   }, []);

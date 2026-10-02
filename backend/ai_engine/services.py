@@ -9,7 +9,7 @@ from django.conf import settings
 from django.db.models import Count, Sum
 from django.utils import timezone
 
-from billing.services import get_or_create_subscription
+from billing.services import effective_plan, get_or_create_subscription
 
 from .models import PromptTemplate, UsageRecord
 from .providers import get_provider
@@ -34,11 +34,14 @@ def usage_this_month(user):
 
 def quota_for(user):
     sub = get_or_create_subscription(user)
-    limit = sub.plan.monthly_quota if sub else 0
+    plan = effective_plan(user)
+    limit = plan.monthly_quota if plan else 0
     used = usage_this_month(user)
     return {"limit": limit, "used": used, "remaining": max(0, limit - used),
-            "plan": sub.plan.slug if sub else "none",
-            "active": bool(sub and sub.is_active())}
+            "plan": plan.slug if plan else "none",
+            "active": bool(sub and sub.is_active()),
+            "expired": bool(sub and sub.is_expired()),
+            "subscribed_plan": sub.plan.slug if sub else "none"}
 
 
 def check_quota(user):

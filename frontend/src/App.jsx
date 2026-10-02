@@ -14,9 +14,13 @@ import Blog from "./pages/public/Blog";
 import BlogPost from "./pages/public/BlogPost";
 import Pricing from "./pages/public/Pricing";
 import Privacy from "./pages/public/Privacy";
+import ProductPrivacy from "./pages/public/ProductPrivacy";
+import Store from "./pages/public/Store";
 
 import Login from "./pages/auth/Login";
 import Signup from "./pages/auth/Signup";
+import ForgotPassword from "./pages/auth/ForgotPassword";
+import ResetPassword from "./pages/auth/ResetPassword";
 
 import Dashboard from "./pages/app/Dashboard";
 import ToolPage from "./pages/app/ToolPage";
@@ -29,6 +33,7 @@ const AdminOverview = lazy(() => import("./pages/admin/AdminOverview"));
 const AdminSubscribers = lazy(() => import("./pages/admin/AdminSubscribers"));
 const AdminTemplates = lazy(() => import("./pages/admin/AdminTemplates"));
 const AdminBlog = lazy(() => import("./pages/admin/AdminBlog"));
+const AdminContent = lazy(() => import("./pages/admin/AdminContent"));
 
 const Loader = (
   <div style={{ minHeight: "50vh", display: "grid", placeItems: "center" }}>
@@ -71,11 +76,15 @@ export default function App() {
       <Route path="/blog" element={<PublicPage><Blog /></PublicPage>} />
       <Route path="/blog/:slug" element={<PublicPage><BlogPost /></PublicPage>} />
       <Route path="/contact" element={<PublicPage><Contact /></PublicPage>} />
+      <Route path="/store" element={<PublicPage><Store /></PublicPage>} />
       <Route path="/privacy" element={<PublicPage><Privacy /></PublicPage>} />
+      <Route path="/privacy/:slug" element={<PublicPage><ProductPrivacy /></PublicPage>} />
 
       {/* Auth */}
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Signup />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
 
       {/* AI Suite app */}
       <Route path="/app" element={<Protected><AppLayout /></Protected>}>
@@ -93,6 +102,7 @@ export default function App() {
         <Route path="subscribers" element={<Suspense fallback={Loader}><AdminSubscribers /></Suspense>} />
         <Route path="templates" element={<Suspense fallback={Loader}><AdminTemplates /></Suspense>} />
         <Route path="blog" element={<Suspense fallback={Loader}><AdminBlog /></Suspense>} />
+        <Route path="content" element={<Suspense fallback={Loader}><AdminContent /></Suspense>} />
       </Route>
 
       <Route path="*" element={<PublicPage><NotFound /></PublicPage>} />

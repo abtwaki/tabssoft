@@ -1,5 +1,7 @@
 import { ArrowRight, CheckCircle2, ExternalLink, GraduationCap } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { api } from "../../api/client";
 import TabsForgeLogo from "../../components/TabsForgeLogo";
 
 const SECTIONS = [
@@ -53,6 +55,22 @@ const SECTIONS = [
 ];
 
 export default function Services() {
+  // CMS-managed overrides (Admin → Site content) fall back to the copy above.
+  const [cms, setCms] = useState({});
+  useEffect(() => {
+    api("/content/", { auth: false }).then(setCms).catch(() => {});
+  }, []);
+
+  const sections = SECTIONS.map((s) => {
+    const block = cms[`services_${s.id}`];
+    if (!block) return s;
+    return {
+      ...s,
+      title: block.title || s.title,
+      lead: (block.content || "").replace(/<[^>]+>/g, "").trim() || s.lead,
+    };
+  });
+
   return (
     <>
       <section className="page-head" style={{ background: "var(--bg-soft)" }}>
@@ -69,7 +87,7 @@ export default function Services() {
       <section className="section tight">
         <div className="container">
           <div className="grid grid-2 stagger">
-            {SECTIONS.map((s) => (
+            {sections.map((s) => (
               <div className="card" key={s.id} id={s.id} style={{ padding: 34 }}>
                 {s.logo ? (
                   <TabsForgeLogo height={58} style={{ marginBottom: 14 }} />
