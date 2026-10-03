@@ -1,10 +1,11 @@
 [Unit]
-Description=TabsSoft Website — Django/Gunicorn on 127.0.0.1:8003
+Description=TabsSoft Website - Django/Gunicorn on 127.0.0.1:8003
 After=network.target postgresql.service
 
 [Service]
 Type=simple
-User=root
+User=tabssoft
+Group=tabssoft
 WorkingDirectory=/var/www/tabssoft-website/backend
 EnvironmentFile=/var/www/tabssoft-website/backend/.env
 ExecStart=/var/www/tabssoft-website/backend/.venv/bin/gunicorn \
@@ -12,11 +13,15 @@ ExecStart=/var/www/tabssoft-website/backend/.venv/bin/gunicorn \
     --workers 3 \
     --threads 4 \
     --timeout 120 \
-    --access-logfile /var/log/tabssoft-access.log \
-    --error-logfile /var/log/tabssoft-error.log \
+    --access-logfile /var/log/tabssoft/access.log \
+    --error-logfile /var/log/tabssoft/error.log \
     tabssoft.wsgi:application
 Restart=always
 RestartSec=5
+NoNewPrivileges=true
+ProtectSystem=full
+ProtectHome=true
+PrivateTmp=true
 
 [Install]
 WantedBy=multi-user.target

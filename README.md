@@ -54,7 +54,7 @@ Demo logins (password `DemoPass2026!`): `admin@tabssoftglobal.com` (staff),
 |---|---|
 | `DJANGO_SECRET_KEY` | Django secret — required in prod |
 | `DJANGO_DEBUG` | `false` in production |
-| `DATABASE_URL` | e.g. `postgres://tabssoft:***@127.0.0.1:5432/tabssoft_db` |
+| `DATABASE_URL` | e.g. `postgres://tabssoft_user:***@127.0.0.1:5432/tabssoft_db` |
 | `AI_PROVIDER` | `anthropic` or `openai` |
 | `ANTHROPIC_API_KEY` / `OPENAI_API_KEY` | Provider key for the chosen engine |
 | `ANTHROPIC_MODEL` / `OPENAI_MODEL` | Model overrides |
@@ -93,15 +93,18 @@ Target: Ubuntu 22.04, Apache, PostgreSQL `tabssoft_db`, backend on
 `/var/www/tabssoft-website/frontend/build`.
 
 ```bash
-# On the server
-createdb -U postgres tabssoft_db && createuser -U postgres tabssoft -P
+# On the server — dedicated DB user + database
+createuser -U postgres tabssoft_user -P && createdb -U postgres -O tabssoft_user tabssoft_db
 # upload project, then:
 cd tabssoftglobal && bash deploy/deploy.sh
 # Once DNS resolves:
-certbot --apache -d tabssoftglobal.com -d www.tabssoftglobal.com
+certbot --apache -d tabssoftglobal.com -d www.tabssoftglobal.com \
+  -d tabssoftglobal.com.ng -d www.tabssoftglobal.com.ng
 ```
 
 Apache serves the React build directly; `/api/` and `/admin/` proxy to
-gunicorn. See `deploy/apache/*.conf` and `deploy/systemd/tabssoft.service`.
+gunicorn. The backend runs as dedicated OS user `tabssoft` under
+`tabssoft-website.service`. See `deploy/apache/*.conf` and
+`deploy/systemd/tabssoft-website.service`.
 
 Health check: `GET /api/health/` → `{status, db, ai_provider, ai_configured}`.

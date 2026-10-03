@@ -28,11 +28,18 @@ echo "==> Migrations + static files"
 ./.venv/bin/python manage.py collectstatic --noinput
 ./.venv/bin/python manage.py seed_demo   # idempotent
 
+echo "==> Dedicated service user + log dir"
+id tabssoft >/dev/null 2>&1 || useradd -r -s /usr/sbin/nologin -d "$APP_ROOT" tabssoft
+mkdir -p /var/log/tabssoft
+chown tabssoft:tabssoft /var/log/tabssoft
+chown -R tabssoft:tabssoft "$APP_ROOT"
+chmod 600 "$APP_ROOT/backend/.env"
+
 echo "==> systemd service"
-cp "$APP_ROOT/deploy/systemd/tabssoft.service" /etc/systemd/system/
+cp "$APP_ROOT/deploy/systemd/tabssoft-website.service" /etc/systemd/system/
 systemctl daemon-reload
-systemctl enable --now tabssoft
-systemctl restart tabssoft
+systemctl enable --now tabssoft-website
+systemctl restart tabssoft-website
 
 echo "==> Apache vhost"
 cp "$APP_ROOT/deploy/apache/tabssoftglobal.com.conf" /etc/apache2/sites-available/
@@ -46,4 +53,5 @@ sleep 1
 curl -s http://127.0.0.1:8003/api/health/ || true
 echo
 echo "Site live once DNS points here. Then run:"
-echo "  certbot --apache -d tabssoftglobal.com -d www.tabssoftglobal.com"
+echo "  certbot --apache -d tabssoftglobal.com -d www.tabssoftglobal.com \\"
+echo "    -d tabssoftglobal.com.ng -d www.tabssoftglobal.com.ng"
